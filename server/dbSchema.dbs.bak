@@ -65,7 +65,7 @@
 		</table>
 	</schema>
 	<layout name="Default Layout" id="Layout-1bb4" show_relation="columns" >
-		<entity schema="fullstack-mern-app" name="Friend" color="C1D8EE" x="896" y="544" />
+		<entity schema="fullstack-mern-app" name="Friend" color="C1D8EE" x="944" y="544" />
 		<entity schema="fullstack-mern-app" name="Images" color="C1D8EE" x="1312" y="848" />
 		<entity schema="fullstack-mern-app" name="Post" color="C1D8EE" x="944" y="208" />
 		<entity schema="fullstack-mern-app" name="User" color="C1D8EE" x="416" y="240" />
