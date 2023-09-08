@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="fullstack-mern-app" id="Project-18d6" database="MongoDb" >
+	<schema name="fullstack-mern-app" >
+		<table name="Collection" />
+		<table name="Friend" prior="Collection_0" >
+			<column name="_id" type="string" jt="12" />
+			<column name="firstName" type="string" jt="12" />
+			<column name="lastName" type="string" jt="12" />
+			<column name="picturePath" type="string" jt="12" />
+			<column name="occupation" type="string" jt="12" />
+			<column name="location" type="string" jt="12" />
+			<fk name="fk_friend_user" virtual="y" to_schema="fullstack-mern-app" to_table="User" >
+				<fk_column name="_id" pk="friends" />
+			</fk>
+			<fk name="fk_friend_images" virtual="y" to_schema="fullstack-mern-app" to_table="Images" >
+				<fk_column name="picturePath" pk="path" />
+			</fk>
+		</table>
+		<table name="Images" prior="Collection_0" >
+			<column name="_id" type="objectId" jt="-8" mandatory="y" />
+			<column name="path" type="string" jt="12" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="Post" prior="Collection_0" >
+			<column name="_id" type="string" jt="12" />
+			<column name="userId" type="string" jt="12" />
+			<column name="firstName" type="string" jt="12" />
+			<column name="lastName" type="string" jt="12" />
+			<column name="location" type="string" jt="12" />
+			<column name="description" type="string" jt="12" />
+			<column name="userPicturePath" type="string" jt="12" />
+			<column name="picturePath" type="string" jt="12" />
+			<column name="likes" type="object" jt="4999544" />
+			<column name="comments" type="array[string]" jt="2003" />
+			<fk name="fk_post_images" virtual="y" to_schema="fullstack-mern-app" to_table="Images" >
+				<fk_column name="picturePath" pk="path" />
+			</fk>
+			<fk name="fk_post_images_userPicturePath" virtual="y" to_schema="fullstack-mern-app" to_table="Images" >
+				<fk_column name="userPicturePath" pk="path" />
+			</fk>
+			<fk name="fk_post_user" virtual="y" to_schema="fullstack-mern-app" to_table="User" >
+				<fk_column name="likes" pk="_id" />
+			</fk>
+			<fk name="fk_post_user_userId" virtual="y" to_schema="fullstack-mern-app" to_table="User" >
+				<fk_column name="userId" pk="_id" />
+			</fk>
+		</table>
+		<table name="User" prior="Collection" >
+			<column name="_id" type="string" jt="12" />
+			<column name="firstName" type="string" jt="12" />
+			<column name="lastName" type="string" jt="12" />
+			<column name="friends" type="array[object]" jt="4999545" />
+			<column name="email" type="string" jt="12" />
+			<column name="password" type="string" jt="12" />
+			<column name="picturePath" type="string" jt="12" />
+			<column name="location" prior="locatioin" type="string" jt="12" />
+			<column name="occupation" type="string" jt="12" />
+			<column name="viewedProfile" type="int" jt="4" />
+			<column name="impressions" type="int" jt="4" />
+			<fk name="fk_user_images" virtual="y" to_schema="fullstack-mern-app" to_table="Images" >
+				<fk_column name="picturePath" pk="path" />
+			</fk>
+		</table>
+	</schema>
+	<layout name="Default Layout" id="Layout-1bb4" show_relation="columns" >
+		<entity schema="fullstack-mern-app" name="Friend" color="C1D8EE" x="944" y="544" />
+		<entity schema="fullstack-mern-app" name="Images" color="C1D8EE" x="1312" y="848" />
+		<entity schema="fullstack-mern-app" name="Post" color="C1D8EE" x="944" y="208" />
+		<entity schema="fullstack-mern-app" name="User" color="C1D8EE" x="416" y="240" />
+		<entity schema="fullstack-mern-app" name="User" column="friends" color="3986C1" x="256" y="240" />
+		<entity schema="fullstack-mern-app" name="Post" column="likes" color="3986C1" x="1232" y="208" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Right-click the layout to create new tables. 
+- Double-click table headers to edit. 
+- For a better understanding of the schema, create multiple layouts.
+- Save the design to the model file, and deploy from 'Schema / Create into the database'.]]></comment>
+		</callout>
+	</layout>
+</project>
