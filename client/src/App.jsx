@@ -17,7 +17,6 @@ const App = () => {
 
   return (
     <div className="app">
-      <h1>App.jsx</h1>
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline />

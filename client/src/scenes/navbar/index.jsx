@@ -34,7 +34,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const { mode, user } = useSelector((state) => state);
+  const { user } = useSelector((state) => state);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
