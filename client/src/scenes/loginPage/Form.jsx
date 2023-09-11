@@ -12,7 +12,7 @@ import EditOutlinedIcon from "@mui/icons-material/EditOffOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
-import setLogin from "../../state";
+import { setLogin } from "../../state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 
@@ -85,7 +85,6 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    console.log('values: ', values);
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -93,8 +92,6 @@ const Form = () => {
     });
 
     const loggedIn = await loggedInResponse.json();
-    console.log("🚀 ~ file: Form.jsx:95 ~ login ~ loggedIn:", loggedIn)
-
     onSubmitProps.resetForm();
 
     if (loggedIn) {
