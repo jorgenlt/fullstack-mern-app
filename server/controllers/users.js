@@ -38,12 +38,20 @@ export const addRemoveFriend = async (req, res) => {
     const { id, friendId } = req.params;
 
     const user = await User.findById(id);
-
     const friend = await User.findById(friendId);
 
-    if (user.friend.includes(friendId)) {
-      user.friends = user.friends.filter((id) => id !== friendId);
-      friend.friends = friend.friends.filter((id) => id !== id);
+    // Check if user and friend exist
+    if (!user || !friend) {
+      return res.status(404).json({ message: "User or friend not found" });
+    }
+
+    if (user.friends.includes(friendId)) {
+      user.friends = user.friends.filter(
+        (friendIdInList) => friendIdInList !== friendId
+      );
+      friend.friends = friend.friends.filter(
+        (userIdInList) => userIdInList !== id
+      );
     } else {
       user.friends.push(friendId);
       friend.friends.push(id);

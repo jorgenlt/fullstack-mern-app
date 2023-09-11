@@ -37,7 +37,6 @@ const UserWidget = ({ userId, picturePath }) => {
   }, []);
 
   if (!user) {
-    console.log('no user');
     return null;
   }
 
