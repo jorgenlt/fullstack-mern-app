@@ -23,7 +23,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const { dark, medium, main } = palette.neutral;
 
   // Get token from redux store
-  const { token } = useSelector((state) => state);
+  const token = useSelector((state) => state.token);
 
   // Fetch user from API
   const getUser = async () => {

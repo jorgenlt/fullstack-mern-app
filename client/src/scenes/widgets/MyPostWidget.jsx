@@ -31,8 +31,8 @@ const MyPostWidget = ({ picturePath }) => {
   const [post, setPost] = useState("");
 
   // Getting _id and token from redux store
-  const { _id } = useSelector((state) => state.user);
-  const { token } = useSelector((state) => state);
+  const _id = useSelector((state) => state.user.id);
+  const token = useSelector((state) => state.token);
 
   // Hooks
   const dispatch = useDispatch();

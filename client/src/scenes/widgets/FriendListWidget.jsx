@@ -9,8 +9,8 @@ const FriendListWidget = ({ userId }) => {
   // Hooks
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state);
-  const { friends } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
 
   const { palette } = useTheme();
 

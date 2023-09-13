@@ -11,7 +11,7 @@ import ProfilePage from "./scenes/profilePage";
 import "./App.css";
 
 const App = () => {
-  const { mode } = useSelector((state) => state);
+  const mode = useSelector((state) => state.mode);
 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 

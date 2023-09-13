@@ -29,7 +29,7 @@ const PostWidget = ({
   const dispatch = useDispatch();
 
   // Get token from redux store
-  const { token } = useSelector((state) => state);
+  const token = useSelector((state) => state.token);
 
   // Get user id from redux store
   const loggedInUserId = useSelector((state) => state.user._id);

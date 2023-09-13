@@ -13,7 +13,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
   // Selecting user data and token from redux store
   const { _id, friends } = useSelector((state) => state.user);
-  const { token } = useSelector((state) => state);
+  const token = useSelector((state) => state.token);
 
   // Using theme hook to access color palette
   const { palette } = useTheme();
@@ -75,17 +75,20 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           </Typography>
         </Box>
       </FlexBetween>
-      <IconButton
-        onClick={() => patchFriend()}
-        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
-      >
-        {/* If the user is a friend, show remove icon, else show add icon */}
-        {isFriend ? (
-          <PersonRemoveOutlined sx={{ color: primaryDark }} />
-        ) : (
-          <PersonAddOutlined sx={{ color: primaryDark }} />
-        )}
-      </IconButton>
+      {/* Only show add/remove friend icon if current user id is not equal to friend id */}
+      {friendId !== _id && (
+        <IconButton
+          onClick={() => patchFriend()}
+          sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+        >
+          {/* If the user is a friend, show remove icon, else show add icon */}
+          {isFriend ? (
+            <PersonRemoveOutlined sx={{ color: primaryDark }} />
+          ) : (
+            <PersonAddOutlined sx={{ color: primaryDark }} />
+          )}
+        </IconButton>
+      )}
     </FlexBetween>
   );
 };

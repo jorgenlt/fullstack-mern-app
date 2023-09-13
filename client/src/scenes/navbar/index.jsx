@@ -34,7 +34,7 @@ const Navbar = () => {
   const theme = useTheme();
 
   // Get user from redux state
-  const { user } = useSelector((state) => state);
+  const user = useSelector((state) => state.user);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 

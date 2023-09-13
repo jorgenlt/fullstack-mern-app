@@ -8,8 +8,8 @@ const PostsWidget = ({ userId, isProfile = false }) => {
   const dispatch = useDispatch();
 
   // Get posts and token from redux store
-  const { posts } = useSelector((state) => state);
-  const { token } = useSelector((state) => state);
+  const posts = useSelector((state) => state.posts);
+  const token = useSelector((state) => state.token);
 
   // Get all posts
   const getPosts = async () => {
@@ -49,7 +49,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
 
   return (
     <>
-      {posts.map(
+      {posts && posts.map(
         ({
           _id,
           userId,
