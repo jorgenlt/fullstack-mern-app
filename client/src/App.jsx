@@ -8,7 +8,7 @@ import HomePage from "./scenes/homePage";
 import LoginPage from "./scenes/loginPage";
 import ProfilePage from "./scenes/profilePage";
 
-import "./App.scss";
+import "./App.css";
 
 const App = () => {
   const { mode } = useSelector((state) => state);

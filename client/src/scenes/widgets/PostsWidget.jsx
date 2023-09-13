@@ -4,10 +4,14 @@ import { setPosts } from "../../state";
 import PostWidget from "./PostWidget";
 
 const PostsWidget = ({ userId, isProfile = false }) => {
+  // Hooks
   const dispatch = useDispatch();
+
+  // Get posts and token from redux store
   const { posts } = useSelector((state) => state);
   const { token } = useSelector((state) => state);
 
+  // Get all posts
   const getPosts = async () => {
     const response = await fetch("http://localhost:3001/posts", {
       method: "GET",
@@ -17,6 +21,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     dispatch(setPosts({ posts: data }));
   };
 
+  // Get all posts from user
   const getUserPosts = async () => {
     const response = await fetch(
       `http://localhost:3001/posts/${userId}/posts`,
@@ -25,7 +30,11 @@ const PostsWidget = ({ userId, isProfile = false }) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+
+    // Parse response to json
     const data = await response.json();
+
+    // Dispath state action to update posts
     dispatch(setPosts({ posts: data }));
   };
 

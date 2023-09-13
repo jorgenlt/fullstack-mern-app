@@ -30,36 +30,46 @@ const MyPostWidget = ({ picturePath }) => {
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
 
+  // Getting _id and token from redux store
   const { _id } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state);
 
+  // Hooks
   const dispatch = useDispatch();
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
+  // Getting theme and colors
   const { palette } = useTheme();
   const { medium, mediumMain } = palette.neutral;
 
+  // Handle post creation
   const handlePost = async () => {
+    // Creating formData object to send a POST request
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
 
+    // If image exists, append it to the formData
     if (image) {
       formData.append("picture", image);
       formData.append("picturePath", image.name);
     }
 
+    // POST request to create a new post
     const response = await fetch(`http://localhost:3001/posts`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
       body: formData,
     });
 
+    // Parsing the response data to json
     const posts = await response.json();
 
+    // Dispatching action to update posts in the redux store
     dispatch(setPosts({ posts }));
 
+    // Resetting state variables
     setImage(null);
     setPost("");
   };

@@ -15,19 +15,26 @@ import { useNavigate } from "react-router-dom";
 const UserWidget = ({ userId, picturePath }) => {
   const [user, setUser] = useState(null);
 
-  const { palette } = useTheme();
+  // Hooks
   const navigate = useNavigate();
 
-  const { token } = useSelector((state) => state);
-
+  // Get theme and colors
+  const { palette } = useTheme();
   const { dark, medium, main } = palette.neutral;
 
+  // Get token from redux store
+  const { token } = useSelector((state) => state);
+
+  // Fetch user from API
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
+
+    // Parse response to json
     const data = await response.json();
+    
     setUser(data);
   };
 

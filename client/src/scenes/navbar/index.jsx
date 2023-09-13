@@ -1,8 +1,6 @@
 import { useState } from "react";
 import {
   Box,
-  Icon,
-  Button,
   InputBase,
   Typography,
   Select,
@@ -30,16 +28,18 @@ import FlexBetween from "../../components/FlexBetween";
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
 
+  // Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const theme = useTheme();
 
+  // Get user from redux state
   const { user } = useSelector((state) => state);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
+  // Get colors from theme
   const { light: neutralLight, dark } = theme.palette.neutral;
-
   const background = theme.palette.background.default;
   const primaryLight = theme.palette.primary.light;
   const alt = theme.palette.background.alt;

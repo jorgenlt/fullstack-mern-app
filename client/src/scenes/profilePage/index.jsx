@@ -11,12 +11,15 @@ import UserWidget from "../widgets/UserWidget";
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
 
+  // Using useParams to get the userId from the URL.
   const { userId } = useParams();
 
+  // Get the token from the Redux store.
   const { token } = useSelector((state) => state);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
+  // Fetch user data from the server.
   const getUser = async () => {
     const response = await fetch(`http://localhost:3001/users/${userId}`, {
       method: "GET",
@@ -28,7 +31,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     getUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!user) return null;

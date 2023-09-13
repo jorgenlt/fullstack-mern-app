@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "../../state";
 
 const FriendListWidget = ({ userId }) => {
+  // Hooks
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state);
@@ -13,6 +14,7 @@ const FriendListWidget = ({ userId }) => {
 
   const { palette } = useTheme();
 
+  // Fetch friend data from API
   const getFriends = async () => {
     const response = await fetch(
       `http://localhost:3001/users/${userId}/friends`,
@@ -21,7 +23,10 @@ const FriendListWidget = ({ userId }) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    // Parsing the response data to JSON
     const data = await response.json();
+
+    // Dispatching the setFriends action with the retrieved data
     dispatch(setFriends({ friends: data }));
   };
 
@@ -40,6 +45,7 @@ const FriendListWidget = ({ userId }) => {
         Friend List
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
+        {/* Mapping through the friends array and rendering a Friend component for each friend */}
         {friends.map((friend) => (
           <Friend
             key={friend._id}

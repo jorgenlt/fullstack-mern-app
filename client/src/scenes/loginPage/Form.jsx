@@ -16,6 +16,7 @@ import { setLogin } from "../../state";
 import Dropzone from "react-dropzone";
 import FlexBetween from "../../components/FlexBetween";
 
+// Validation schema for register form
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
   lastName: yup.string().required("required"),
@@ -26,11 +27,13 @@ const registerSchema = yup.object().shape({
   picture: yup.string().required("required"),
 });
 
+// Validation schema for login form
 const loginSchema = yup.object().shape({
   email: yup.string().email("Invalid email.").required("required"),
   password: yup.string().required("required"),
 });
 
+// Initial values for register form
 const initialValuesRegister = {
   firstName: "",
   lastName: "",
@@ -41,14 +44,17 @@ const initialValuesRegister = {
   picture: "",
 };
 
+// Initial values for login form
 const initialValuesLogin = {
   email: "",
   password: "",
 };
 
 const Form = () => {
+  // State to manage form type (login or register)
   const [pageType, setPageType] = useState("login");
 
+  // Hooks
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -57,6 +63,7 @@ const Form = () => {
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
 
+  // Function to handle register form submission
   const register = async (values, onSubmitProps) => {
     // send form info with image
     const formData = new FormData();
@@ -84,6 +91,7 @@ const Form = () => {
     }
   };
 
+  // Function to handle login form submission
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
@@ -105,6 +113,7 @@ const Form = () => {
     }
   };
 
+  // Function to handle form submission
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);

@@ -7,21 +7,28 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+  // Hooks
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Selecting user data and token from redux store
   const { _id, friends } = useSelector((state) => state.user);
   const { token } = useSelector((state) => state);
 
+  // Using theme hook to access color palette
   const { palette } = useTheme();
 
+  // Defining colors from palette
   const primaryLight = palette.primary.light;
   const primaryDark = palette.primary.dark;
   const { main, medium } = palette.neutral;
 
+  // Checking if the user is already a friend
   const isFriend = friends.find((friend) => friend._id === friendId);
 
+  // Function to add or remove friend
   const patchFriend = async () => {
+    // Sending PATCH request to server
     const response = await fetch(
       `http://localhost:3001/users/${_id}/${friendId}`,
       {
@@ -32,7 +39,11 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         },
       }
     );
+
+    // Parsing response to JSON
     const data = await response.json();
+
+    // Dispatching setFriends action with updated friends list
     dispatch(setFriends({ friends: data }));
   };
 
@@ -68,6 +79,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         onClick={() => patchFriend()}
         sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
       >
+        {/* If the user is a friend, show remove icon, else show add icon */}
         {isFriend ? (
           <PersonRemoveOutlined sx={{ color: primaryDark }} />
         ) : (
@@ -78,4 +90,5 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   );
 };
 
+// Exporting Friend component as default
 export default Friend;

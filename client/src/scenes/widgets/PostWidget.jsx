@@ -25,18 +25,26 @@ const PostWidget = ({
 }) => {
   const [isComments, setIsComments] = useState(false);
 
+  // Hooks
   const dispatch = useDispatch();
 
+  // Get token from redux store
   const { token } = useSelector((state) => state);
+
+  // Get user id from redux store
   const loggedInUserId = useSelector((state) => state.user._id);
 
+  // Check if post is liked by user
   const isLiked = Boolean(likes[loggedInUserId]);
+
   const likeCount = Object.keys(likes).length;
 
+  // Getting theme and colors
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
+  // Update like on post
   const patchLike = async () => {
     const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
       method: "PATCH",
@@ -46,7 +54,10 @@ const PostWidget = ({
       },
       body: JSON.stringify({ userId: loggedInUserId }),
     });
+    // Parse response to json
     const updatedPost = await response.json();
+
+    // Dispatch state action to update post
     dispatch(setPost({ post: updatedPost }));
   };
 
