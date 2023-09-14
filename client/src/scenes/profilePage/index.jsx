@@ -15,7 +15,7 @@ const ProfilePage = () => {
   const { userId } = useParams();
 
   // Get the token from the Redux store.
-  const { token } = useSelector((state) => state);
+  const token = useSelector((state) => state.token);
 
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 

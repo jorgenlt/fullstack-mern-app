@@ -19,7 +19,7 @@ export const users = [
     email: "aaaaaaa@gmail.com",
     password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
     picturePath: "p11.jpeg",
-    friends: [],
+    friends: [userIds[1], userIds[2], userIds[3]],
     location: "San Fran, CA",
     occupation: "Software Engineer",
     viewedProfile: 14561,
